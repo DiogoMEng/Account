@@ -1,0 +1,17 @@
+{
+  "name": "accounts",
+  "version": "1.0.0",
+  "description": "Projeto sem interface gráfica executado totalmente pelo terminal com o propósito de reforçar conceitos básicos de NodeJS.\r O projeto se baseia em um sistema de contas de bancos, onde o usuário consegue criar sua conta, consultar o seu saldo, depositar ou sacar.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.1.2"
+  }
+}
