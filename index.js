@@ -29,8 +29,6 @@ function operation() {
 
             const action = answer['action'];
 
-            console.log('caiu aqui ', action);
-
             switch (action) {
                 case 'Criar Conta':
                     createAccount();
@@ -69,10 +67,18 @@ function buildAccount(){
 
     inquirer.prompt([{
         name: 'accountName',
-        message: 'Digite um nome para sua conta: '
+        message: 'Digite um nome para sua conta: ',
+    }, {
+        name: 'userName',
+        message: 'Digite o seu nome completo: '
+    }, {
+        name: 'password',
+        message: 'Define uma senha para sua conta: '
     }]).then(answer => {
 
         const accountName = answer['accountName'];
+        const userName = answer['userName'];
+        const password = answer['password'];
         console.info(accountName);
 
         if(!fs.existsSync('account')){
@@ -84,7 +90,7 @@ function buildAccount(){
             return buildAccount();
         }
 
-        fs.writeFileSync(`account/${accountName}.json`, '{ "balance": 0 }', function(err){
+        fs.writeFileSync(`account/${accountName}.json`, `{ "userName": "${userName}", "password": "${password}", "balance": 0 }`, function(err){
             console.log(err);
         })
 
@@ -102,13 +108,19 @@ function deposit(){ // #
         {
             name: 'accountName',
             message: 'Qual o nome da sua conta?'
+        },
+        {
+            name: 'password',
+            message: 'Informe sua senha de usuário: '
         }
     ]).then((answer) => {
 
         const accountName = answer['accountName'];
+        const password = answer['password'];
+
 
         // verifica existencia da conta
-        if(!checkAccount(accountName)){
+        if(!checkAccount(accountName, password)){
             return deposit();
         }
 

@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 function getAccount(accountName) {
 
     const accountJSON = fs.readFileSync(`account/${accountName}.json`, {
@@ -8,3 +10,5 @@ function getAccount(accountName) {
     return JSON.parse(accountJSON);
 
 }
+
+module.exports = getAccount;
