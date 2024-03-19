@@ -2,20 +2,21 @@ const fs = require('fs');
 
 const chalk = require('chalk');
 
-function checkAccount(accountName, password){
+const getAccount = require('./getAccount');
 
-    console.log(accountName, password);
+function checkAccount(accountName, password) {
 
-    if(!fs.existsSync(`account/${accountName}.json`)){
+    if (!fs.existsSync(`account/${accountName}.json`)) {
         console.log(chalk.bgRed.black('Está conta não existe, escolha outro nome!'));
         return false;
     }
 
-    fs.readFile(`account/${accountName}.json`, 'utf-8', function(err, data){
+    accountName = getAccount(accountName);
 
-        console.log(data);
-
-    });
+    if (password != accountName.password) {
+        console.log(chalk.bgRed.black('Ops! senha incorreta, tente novamente mais tarde.'));
+        return false;
+    }
 
     return true;
 
